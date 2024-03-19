@@ -32,6 +32,7 @@ const SubmittedCode = () => {
           <th className="px-6 py-3">Username</th>
           <th className="px-6 py-3">Code Language</th>
           <th className="px-6 py-3">Stdin</th>
+          <th className="px-6 py-3">StdOut</th>
           <th className="px-6 py-3">Timestamp</th>
           <th className="px-6 py-3">Source Code</th>
         </tr>
@@ -43,6 +44,7 @@ const SubmittedCode = () => {
             <td className="px-6 py-4">{entry.username}</td>
             <td className="px-6 py-4">{entry.codeLanguage}</td>
             <td className="px-6 py-4">{entry.stdin}</td>
+            <td className="px-6 py-4">{entry.sourceCode.slice(0, 50)}</td>
             <td className="px-6 py-4">
               {new Date(entry.timestamp).toLocaleString()}
             </td>
