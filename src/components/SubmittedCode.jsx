@@ -15,11 +15,18 @@ const entries = [
     timestamp: 1234567890,
     sourceCode: "print('hello world')",
   },
+  {
+    username: "test3",
+    codeLanguage: "python",
+    stdin: "test3",
+    timestamp: 1234567890,
+    sourceCode: "print('hello world')",
+  },
 ];
 
 const SubmittedCode = () => {
   return (
-    <table className="table-fixed w-full text-sm text-left rtl:text-right text-gray-500 ">
+    <table className="table-fixed w-full text-sm text-left rtl:text-right text-gray-500">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
         <tr className="bg-gray-300">
           <th className="px-6 py-3">Username</th>
@@ -32,11 +39,13 @@ const SubmittedCode = () => {
 
       <tbody className="divide-y divide-gray-200  ">
         {entries.map((entry, index) => (
-          <tr key={index} className="hover:bg-gray-100 ">
+          <tr key={index} className="hover:bg-gray-100 text-gray-900 text-base ">
             <td className="px-6 py-4">{entry.username}</td>
             <td className="px-6 py-4">{entry.codeLanguage}</td>
             <td className="px-6 py-4">{entry.stdin}</td>
-            <td className="px-6 py-4">{new Date(entry.timestamp).toLocaleString()}</td>
+            <td className="px-6 py-4">
+              {new Date(entry.timestamp).toLocaleString()}
+            </td>
             <td className="px-6 py-4">{entry.sourceCode.slice(0, 100)}</td>
           </tr>
         ))}
