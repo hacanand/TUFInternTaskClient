@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const entries = [
   {
     username: "test",
@@ -25,34 +27,51 @@ const entries = [
 ];
 
 const SubmittedCode = () => {
+  useEffect(() => {
+     async function fetchData() {
+      const data = await axios.get("http://localhost:3000/api/users");
+      console.log(data.data);
+    }
+    fetchData();
+  }, []);
+  const navigate = useNavigate();
+  const changePage = () => {
+    navigate("/");
+  };
   return (
-    <table className="table-fixed w-full text-sm text-left rtl:text-right text-gray-500">
-      <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
-        <tr className="bg-gray-300">
-          <th className="px-6 py-3">Username</th>
-          <th className="px-6 py-3">Code Language</th>
-          <th className="px-6 py-3">Stdin</th>
-          <th className="px-6 py-3">StdOut</th>
-          <th className="px-6 py-3">Timestamp</th>
-          <th className="px-6 py-3">Source Code</th>
-        </tr>
-      </thead>
-
-      <tbody className="divide-y divide-gray-200  ">
-        {entries.map((entry, index) => (
-          <tr key={index} className="hover:bg-gray-100 text-gray-900 text-base ">
-            <td className="px-6 py-4">{entry.username}</td>
-            <td className="px-6 py-4">{entry.codeLanguage}</td>
-            <td className="px-6 py-4">{entry.stdin}</td>
-            <td className="px-6 py-4">{entry.sourceCode.slice(0, 50)}</td>
-            <td className="px-6 py-4">
-              {new Date(entry.timestamp).toLocaleString()}
-            </td>
-            <td className="px-6 py-4">{entry.sourceCode.slice(0, 100)}</td>
+    <>
+      <table className="table-fixed w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
+          <tr className="bg-gray-300">
+            <th className="px-6 py-3">Username</th>
+            <th className="px-6 py-3">Code Language</th>
+            <th className="px-6 py-3">Stdin</th>
+            <th className="px-6 py-3">StdOut</th>
+            <th className="px-6 py-3">Timestamp</th>
+            <th className="px-6 py-3">Source Code</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody className="divide-y divide-gray-200  ">
+          {entries.map((entry, index) => (
+            <tr
+              key={index}
+              className="hover:bg-gray-100 text-gray-900 text-base "
+            >
+              <td className="px-6 py-4">{entry.username}</td>
+              <td className="px-6 py-4">{entry.codeLanguage}</td>
+              <td className="px-6 py-4">{entry.stdin}</td>
+              <td className="px-6 py-4">{entry.sourceCode.slice(0, 50)}</td>
+              <td className="px-6 py-4">
+                {new Date(entry.timestamp).toLocaleString()}
+              </td>
+              <td className="px-6 py-4">{entry.sourceCode.slice(0, 100)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button className=" mx-5 mt-10  p-2 bg-slate-400 text-white rounded-md" onClick={changePage}>Coding page</button>
+    </>
   );
 };
 
